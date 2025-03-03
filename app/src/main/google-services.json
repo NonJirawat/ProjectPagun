@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "632893993453",
+    "project_id": "projectpagun",
+    "storage_bucket": "projectpagun.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632893993453:android:fddbc9dc7655f5c00377e4",
+        "android_client_info": {
+          "package_name": "com.example.projectpagun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlKCr6sy7yYMOgpBGH0G2M1ZjSFqazyeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
