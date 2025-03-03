@@ -1,16 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.ProjectPagun" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
+        <!-- เปลี่ยน Primary brand color เป็นสีฟ้า -->
+        <item name="colorPrimary">#2196F3</item> <!-- สีฟ้า -->
+        <item name="colorPrimaryVariant">#1976D2</item> <!-- สีฟ้าเข้ม -->
+        <item name="colorOnPrimary">@color/white</item> <!-- ตัวอักษรสีขาว -->
+
+        <!-- Secondary brand color -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
+
+        <!-- เปลี่ยนสี Status bar -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
 </resources>
