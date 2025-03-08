@@ -1,4 +1,4 @@
-package com.example.projectpagun.ui.dashboard
+package com.example.projectpagun.ui.status
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.projectpagun.databinding.FragmentDashboardBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
-class DashboardFragment : Fragment() {
+class StatusFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!

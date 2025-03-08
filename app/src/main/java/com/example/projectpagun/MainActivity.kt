@@ -12,11 +12,10 @@ import com.example.projectpagun.databinding.ActivityMainBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var database: DatabaseReference // เพิ่ม    Firebase Database Reference
+    private lateinit var database: DatabaseReference // Firebase Database Reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,18 +24,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+        // ❌ เอา action ออกจาก AppBarConfiguration เพราะมันไม่ใช่ destination
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_settings
+                R.id.navigation_home,
+                R.id.navigation_dashboard,
+                R.id.navigation_notifications
             )
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // ✅ ทดสอบส่งข้อมูลไป Firebase
         database = FirebaseDatabase.getInstance().getReference("messages")
-        database.setValue("Hello Firebase!") // ทดสอบส่งข้อมูล
+        database.setValue("Hello Firebase!")
             .addOnSuccessListener {
                 Log.d("FirebaseTest", "✅ ส่งข้อมูลไปยัง Firebase สำเร็จ!")
             }

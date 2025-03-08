@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.insurance.SelectPlanActivity">
+
+    <!-- แบนเนอร์ด้านบน -->
+    <ImageView
+        android:id="@+id/bannerImage"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/banner_insurance"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- CardView สำหรับแสดงแผนประกัน -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardInsurance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:layout_constraintTop_toBottomOf="@id/bannerImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvInsuranceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="แผนประกันของคุณ"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvInsuranceDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ยังไม่มีแผนประกัน กรุณาเลือกแผนประกัน"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- ปุ่มตัวเลือก -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cardInsurance"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnSelectPlan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="เลือกแผนประกัน"
+            android:layout_weight="1"
+            android:layout_margin="8dp" />
+
+        <Button
+            android:id="@+id/btnClaim"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="เคลม"
+            android:layout_weight="1"
+            android:layout_margin="8dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

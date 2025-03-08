@@ -5,28 +5,46 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
+    <!-- หน้า Home -->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.projectpagun.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
 
+        <action
+            android:id="@+id/action_home_to_selectPlan"
+            app:destination="@id/selectPlanFragment" />
+
+        <action
+            android:id="@+id/action_home_to_claim"
+            app:destination="@id/claimFragment" />
+    </fragment>
+    <!-- หน้า Status -->
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.projectpagun.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.example.projectpagun.ui.status.StatusFragment"
+        android:label="Status"
         tools:layout="@layout/fragment_dashboard" />
 
+    <!-- หน้า Profile -->
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.projectpagun.ui.profile.ProfileFragment"
-        android:label="@string/title_notifications"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/selectPlanFragment"
+        android:name="com.example.projectpagun.ui.insurance.SelectPlanFragment"
+        android:label="Select Plan"
+        tools:layout="@layout/activity_select_plan" />
 
     <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.example.projectpagun.ui.settings.SettingsFragment"
-        android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        android:id="@+id/claimFragment"
+        android:name="com.example.projectpagun.ui.claim.ClaimFragment"
+        android:label="Claim"
+        tools:layout="@layout/activity_claim" />
+
+
 
 </navigation>
