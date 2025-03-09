@@ -47,13 +47,23 @@ class HomeFragment : Fragment() {
                         return@addSnapshotListener
                     }
 
+                    // ✅ อ่านค่าจาก Firestore
+                    val startDateTimestamp = document.getTimestamp("start_date")
+                    val endDateTimestamp = document.getTimestamp("end_date")
+
+                    // 🔄 แปลง Timestamp เป็น String
+                    val startDateString = startDateTimestamp?.toDate()?.toString() ?: "-"
+                    val endDateString = endDateTimestamp?.toDate()?.toString() ?: "-"
+
+                    // 🎯 อัปเดต UI
                     binding.insuranceCard.visibility = View.VISIBLE
                     binding.tvInsuranceTitle.text = document.getString("title") ?: "ไม่พบข้อมูล"
-                    binding.tvStartDate.text = document.getString("start_date") ?: "-"
-                    binding.tvEndDate.text = document.getString("end_date") ?: "-"
+                    binding.tvStartDate.text = "เริ่มต้น: $startDateString"
+                    binding.tvEndDate.text = "หมดอายุ: $endDateString"
                 }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
