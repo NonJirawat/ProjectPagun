@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <!-- หน้า Home -->
     <fragment
@@ -20,6 +20,7 @@
             android:id="@+id/action_home_to_claim"
             app:destination="@id/claimFragment" />
     </fragment>
+
     <!-- หน้า Status -->
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -33,18 +34,48 @@
         android:name="com.example.projectpagun.ui.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+
+    <!-- 🔥 ใช้ Fragment แทน Activity -->
     <fragment
         android:id="@+id/selectPlanFragment"
         android:name="com.example.projectpagun.ui.insurance.SelectPlanFragment"
-        android:label="Select Plan"
-        tools:layout="@layout/activity_select_plan" />
+        android:label="เลือกแผนประกัน"
+        tools:layout="@layout/fragment_select_plan">
 
+        <action
+            android:id="@+id/action_selectPlanFragment_to_searchInsuranceFragment"
+            app:destination="@id/searchInsuranceFragment" />
+    </fragment>
+
+    <!-- หน้า Claim -->
     <fragment
         android:id="@+id/claimFragment"
         android:name="com.example.projectpagun.ui.claim.ClaimFragment"
         android:label="Claim"
         tools:layout="@layout/activity_claim" />
 
+    <!-- หน้า Search Insurance -->
+    <fragment
+        android:id="@+id/searchInsuranceFragment"
+        android:name="com.example.projectpagun.ui.insurance.SearchInsuranceFragment"
+        android:label="Search Insurance"
+        tools:layout="@layout/fragment_search_insurance">
 
+        <argument
+            android:name="selectedType"
+            app:argType="string" />
+
+        <argument
+            android:name="brand"
+            app:argType="string" />
+
+        <argument
+            android:name="model"
+            app:argType="string" />
+
+        <argument
+            android:name="year"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

@@ -10,7 +10,8 @@ import com.example.projectpagun.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.projectpagun.R
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -51,9 +52,10 @@ class HomeFragment : Fragment() {
                     val startDateTimestamp = document.getTimestamp("start_date")
                     val endDateTimestamp = document.getTimestamp("end_date")
 
-                    // 🔄 แปลง Timestamp เป็น String
-                    val startDateString = startDateTimestamp?.toDate()?.toString() ?: "-"
-                    val endDateString = endDateTimestamp?.toDate()?.toString() ?: "-"
+                    // 🔄 แปลง Timestamp เป็นวันที่ที่อ่านง่าย
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val startDateString = startDateTimestamp?.toDate()?.let { dateFormat.format(it) } ?: "-"
+                    val endDateString = endDateTimestamp?.toDate()?.let { dateFormat.format(it) } ?: "-"
 
                     // 🎯 อัปเดต UI
                     binding.insuranceCard.visibility = View.VISIBLE
@@ -63,7 +65,6 @@ class HomeFragment : Fragment() {
                 }
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
