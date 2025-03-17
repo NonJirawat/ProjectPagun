@@ -72,8 +72,8 @@ class SelectPlanFragment : Fragment() {
         )
 
         val brands = listOf("เลือกยี่ห้อรถยนต์") + carData.keys.toList()
-        val defaultModelList = listOf("เลือกรุ่นรถยนต์")
-        val years = listOf("เลือกปีรถยนต์") + (2000..2025).map { it.toString() }
+        val defaultModelList = listOf("เลือกรุ่นรถยนต์") + carData.keys.toList()
+        val years = listOf("เลือกปีรถยนต์") + (2010..2025).map { it.toString() }
 
         val brandAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, brands)
         val modelAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, defaultModelList)
