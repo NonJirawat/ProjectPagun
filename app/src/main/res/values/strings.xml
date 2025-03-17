@@ -4,4 +4,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_settings">Settings</string>
+    <string name="select_brand">เลือกยี่ห้อรถยนต์</string>
+    <string name="select_model">เลือกรุ่นรถยนต์</string>
+    <string name="select_year">เลือกปีรถยนต์</string>
+    <!-- ปุ่มค้นหา -->
+    <string name="search_button">ค้นหาแผนประกัน</string>
 </resources>
