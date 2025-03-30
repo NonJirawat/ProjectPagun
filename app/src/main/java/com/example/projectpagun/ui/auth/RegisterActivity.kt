@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectpagun.databinding.ActivityRegisterBinding
+import com.example.projectpagun.ui.Admin.AdminActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import android.util.Patterns
+import com.example.projectpagun.MainActivity
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -52,7 +53,13 @@ class RegisterActivity : AppCompatActivity() {
                             database.child(it).setValue(userMap)
                                 .addOnSuccessListener {
                                     Toast.makeText(this, "สมัครสมาชิกสำเร็จ", Toast.LENGTH_SHORT).show()
-                                    startActivity(Intent(this, LoginActivity::class.java))
+
+                                    // พาไปหน้าเหมาะสมตามบทบาททันที
+                                    when (selectedRole) {
+                                        "admin" -> startActivity(Intent(this, AdminActivity::class.java))
+                                        else -> startActivity(Intent(this, MainActivity::class.java))
+                                    }
+
                                     finish()
                                 }
                                 .addOnFailureListener {
