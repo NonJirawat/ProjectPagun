@@ -46,6 +46,14 @@
             android:name="com.example.projectpagun.RegisterActivity"
             android:exported="true"
             android:label="Register" />
+
+        <!-- 🔹 AdminActivity -->
+        <activity
+            android:name=".ui.Admin.AdminActivity"
+            android:exported="true"
+            android:label="Admin"
+            android:theme="@style/Theme.ProjectPagun"/>
+
     </application>
 
 </manifest>

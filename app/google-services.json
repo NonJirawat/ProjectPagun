@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "632893993453",
+    "firebase_url": "https://projectpagun-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "projectpagun",
     "storage_bucket": "projectpagun.firebasestorage.app"
   },
