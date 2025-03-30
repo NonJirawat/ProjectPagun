@@ -11,6 +11,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.projectpagun.databinding.ActivityMainBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import androidx.core.view.WindowCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,10 +24,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference // Firebase Database Reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -35,7 +44,8 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
+
         navView.setupWithNavController(navController)
 
         // ✅ ทดสอบส่งข้อมูลไป Firebase

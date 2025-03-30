@@ -13,6 +13,10 @@ import com.example.projectpagun.R
 import java.text.SimpleDateFormat
 import java.util.*
 
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -27,7 +31,6 @@ class HomeFragment : Fragment() {
 
         loadInsurancePlan()
 
-        // ใช้ Navigation Component ในการเปลี่ยนหน้า
         binding.btnSelectPlan.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_selectPlan)
         }
@@ -39,6 +42,17 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    // ✅ จัด status bar padding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.topAppBar) { v, insets ->
+            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+            v.setPadding(0, statusBarHeight, 0, 0) // 👈 เพิ่ม padding top เท่าความสูง status bar
+            insets
+        }
+    }
+
     private fun loadInsurancePlan() {
         user?.let { u ->
             db.collection("insurance_plans").document(u.uid)
@@ -48,16 +62,13 @@ class HomeFragment : Fragment() {
                         return@addSnapshotListener
                     }
 
-                    // ✅ อ่านค่าจาก Firestore
                     val startDateTimestamp = document.getTimestamp("start_date")
                     val endDateTimestamp = document.getTimestamp("end_date")
 
-                    // 🔄 แปลง Timestamp เป็นวันที่ที่อ่านง่าย
                     val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                     val startDateString = startDateTimestamp?.toDate()?.let { dateFormat.format(it) } ?: "-"
                     val endDateString = endDateTimestamp?.toDate()?.let { dateFormat.format(it) } ?: "-"
 
-                    // 🎯 อัปเดต UI
                     binding.insuranceCard.visibility = View.VISIBLE
                     binding.tvInsuranceTitle.text = document.getString("title") ?: "ไม่พบข้อมูล"
                     binding.tvStartDate.text = "เริ่มต้น: $startDateString"

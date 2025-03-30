@@ -7,18 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.insurance.SelectPlanFragment">
 
-    <!-- Dropdown เลือกยี่ห้อรถยนต์ -->
+    <!-- ✅ Toolbar ด้านบน -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:title="เลือกแผนประกัน"
+        android:titleTextColor="@android:color/white"
+        app:navigationIcon="@android:drawable/ic_media_previous"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Spinner: เลือกยี่ห้อรถยนต์ -->
     <Spinner
         android:id="@+id/spinnerBrand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:prompt="@string/select_brand"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Dropdown เลือกรุ่นรถยนต์ -->
+    <!-- Spinner: เลือกรุ่นรถยนต์ -->
     <Spinner
         android:id="@+id/spinnerModel"
         android:layout_width="0dp"
@@ -29,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Dropdown เลือกปีรถยนต์ -->
+    <!-- Spinner: เลือกปีรถยนต์ -->
     <Spinner
         android:id="@+id/spinnerYear"
         android:layout_width="0dp"
@@ -40,12 +53,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- RadioGroup เลือกประเภทประกัน -->
+    <!-- RadioGroup: เลือกประเภทประกัน -->
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/spinnerYear"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -76,9 +90,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="ค้นหาแผนประกัน"
+        android:layout_margin="16dp"
         app:layout_constraintTop_toBottomOf="@id/radioGroup"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

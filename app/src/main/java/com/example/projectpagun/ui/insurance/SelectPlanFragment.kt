@@ -12,6 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.projectpagun.R
 import com.example.projectpagun.databinding.FragmentSelectPlanBinding
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+
+
 
 class SelectPlanFragment : Fragment() {
 
@@ -61,6 +67,22 @@ class SelectPlanFragment : Fragment() {
 
         return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // ✅ ให้ Toolbar เว้น status bar (แก้แถบขาว)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.topAppBar) { v, insets ->
+            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+            v.setPadding(0, statusBarHeight, 0, 0)
+            insets
+        }
+
+        // ✅ ปุ่ม back
+        binding.topAppBar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
 
     private fun setupDropdowns() {
         val carData = mapOf(
@@ -126,4 +148,6 @@ class SelectPlanFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }
+

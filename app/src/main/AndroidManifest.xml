@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.projectpagun">
 
-    <!-- Permissions สำหรับ Firebase -->
+    <!-- ✅ Permissions สำหรับ Firebase หรือการเชื่อมต่อเน็ต -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
@@ -18,30 +18,34 @@
         android:theme="@style/Theme.ProjectPagun"
         tools:targetApi="31">
 
-        <!-- กำหนด LoginActivity เป็นจอแรก -->
+        <!-- ✅ SplashActivity เป็น Launcher -->
         <activity
-            android:name="com.example.projectpagun.LoginActivity"
+            android:name=".SplashActivity"
             android:exported="true"
-            android:label="Login">
+            android:theme="@style/Theme.ProjectPagun">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <!-- MainActivity (ใช้หลังจาก Login เสร็จแล้ว) -->
+        <!-- 🔹 LoginActivity -->
+        <activity
+            android:name="com.example.projectpagun.LoginActivity"
+            android:exported="true"
+            android:label="Login" />
+
+        <!-- 🔹 MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name" />
 
-        <!-- RegisterActivity -->
+        <!-- 🔹 RegisterActivity -->
         <activity
             android:name="com.example.projectpagun.RegisterActivity"
             android:exported="true"
-            android:label="Register"/>
-
-
+            android:label="Register" />
     </application>
 
 </manifest>

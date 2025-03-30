@@ -1,92 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
-    <LinearLayout
+
+    <!-- 🔷 Toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
-        <!-- ✅ แก้ไข Banner ให้ขยายเต็มจอ -->
-        <ImageView
-            android:id="@+id/imgBanner"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/banner_insurance" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:title="หน้าแรก"
+            android:titleTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- ✅ เพิ่ม CardView ครอบข้อมูลประกัน -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
-            android:padding="12dp">
+    <!-- 🔽 เนื้อหา Scrollable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
-                android:id="@+id/insuranceCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:padding="12dp">
-
-                <TextView
-                    android:id="@+id/tvInsuranceTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ประกันรถยนต์ชั้น 1"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:paddingBottom="8dp"/>
-
-                <TextView
-                    android:id="@+id/tvStartDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="เริ่ม: -"
-                    android:textColor="@android:color/black"/>
-
-                <TextView
-                    android:id="@+id/tvEndDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="หมดอายุ: -"
-                    android:textColor="@android:color/black"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- ✅ ปรับปุ่มให้มีระยะห่างและขนาดเหมาะสม -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="12dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <Button
-                android:id="@+id/btnSelectPlan"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <!-- รูป Banner -->
+            <ImageView
+                android:id="@+id/imgBanner"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="เลือกแผนประกัน"
-                android:layout_marginEnd="6dp"/>
+                android:layout_marginTop="12dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/banner_insurance" />
 
-            <Button
-                android:id="@+id/btnClaim"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <!-- CardView แผนประกัน -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="เคลม"
-                android:layout_marginStart="6dp"/>
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:id="@+id/insuranceCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/tvInsuranceTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ประกันรถยนต์ชั้น 1"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:paddingBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvStartDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="เริ่ม: -"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/tvEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="หมดอายุ: -"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ปุ่มด้านล่าง -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    android:id="@+id/btnSelectPlan"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="เลือกแผนประกัน"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnClaim"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="เคลม"
+                    android:layout_marginStart="6dp" />
+            </LinearLayout>
+
         </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
