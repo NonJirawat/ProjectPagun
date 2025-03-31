@@ -20,6 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
+
     <!-- Spinner: เลือกยี่ห้อรถยนต์ -->
     <Spinner
         android:id="@+id/spinnerBrand"

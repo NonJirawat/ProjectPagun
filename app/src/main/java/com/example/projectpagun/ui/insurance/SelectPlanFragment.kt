@@ -1,22 +1,20 @@
 package com.example.projectpagun.ui.insurance
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.projectpagun.R
 import com.example.projectpagun.databinding.FragmentSelectPlanBinding
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class SelectPlanFragment : Fragment() {
@@ -24,65 +22,33 @@ class SelectPlanFragment : Fragment() {
     private var _binding: FragmentSelectPlanBinding? = null
     private val binding get() = _binding!!
 
-    private var selectedType = "ชั้น 1" // ค่าเริ่มต้น
+    private var selectedType = "ชั้น 1"
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSelectPlanBinding.inflate(inflater, container, false)
 
-        try {
-            setupDropdowns()
-            setupInsuranceTypeSelection()
-        } catch (e: Exception) {
-            Log.e("SelectPlanFragment", "Error initializing dropdowns", e)
-            Toast.makeText(requireContext(), "เกิดข้อผิดพลาดในการโหลดข้อมูล", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.btnSearch.setOnClickListener {
-            try {
-                val brand = binding.spinnerBrand.selectedItem?.toString() ?: "เลือกยี่ห้อรถยนต์"
-                val model = binding.spinnerModel.selectedItem?.toString() ?: "เลือกรุ่นรถยนต์"
-                val year = binding.spinnerYear.selectedItem?.toString() ?: "เลือกปีรถยนต์"
-
-                // ✅ ตรวจสอบก่อนนำไปใช้
-                if (brand == "เลือกยี่ห้อรถยนต์" || model == "เลือกรุ่นรถยนต์" || year == "เลือกปีรถยนต์") {
-                    Toast.makeText(requireContext(), "กรุณาเลือกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                val bundle = Bundle().apply {
-                    putString("selectedType", selectedType)
-                    putString("brand", brand)
-                    putString("model", model)
-                    putString("year", year)
-                }
-                findNavController().navigate(R.id.searchInsuranceFragment, bundle)
-
-            } catch (e: Exception) {
-                Log.e("SelectPlanFragment", "Error in btnSearch click", e)
-                Toast.makeText(requireContext(), "เกิดข้อผิดพลาด กรุณาลองใหม่", Toast.LENGTH_SHORT).show()
-            }
-        }
+        setupToolbar()
+        setupDropdowns()
+        setupRadioGroup()
+        setupSearchButton()
 
         return binding.root
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        // ✅ ให้ Toolbar เว้น status bar (แก้แถบขาว)
+    private fun setupToolbar() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.topAppBar) { v, insets ->
             val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
             v.setPadding(0, statusBarHeight, 0, 0)
             insets
         }
 
-        // ✅ ปุ่ม back
         binding.topAppBar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
     }
-
 
     private fun setupDropdowns() {
         val carData = mapOf(
@@ -93,9 +59,10 @@ class SelectPlanFragment : Fragment() {
             "Nissan" to listOf("เลือกรุ่นรถยนต์", "Almera", "Navara", "Teana")
         )
 
-        val brands = listOf("เลือกยี่ห้อรถยนต์") + carData.keys.toList()
-        val defaultModelList = listOf("เลือกรุ่นรถยนต์") + carData.keys.toList()
-        val years = listOf("เลือกปีรถยนต์") + (2010..2025).map { it.toString() }
+        // ✅ แก้ตรงนี้: ให้ list เป็น MutableList เพื่อใช้กับ .clear() ได้
+        val brands = mutableListOf("เลือกยี่ห้อรถยนต์").apply { addAll(carData.keys) }
+        val defaultModelList = mutableListOf("เลือกรุ่นรถยนต์")
+        val years = mutableListOf("เลือกปีรถยนต์").apply { addAll((2010..2025).map { it.toString() }) }
 
         val brandAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, brands)
         val modelAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, defaultModelList)
@@ -107,33 +74,28 @@ class SelectPlanFragment : Fragment() {
 
         binding.spinnerBrand.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                try {
-                    if (position == 0) {
-                        modelAdapter.clear()
-                        modelAdapter.addAll(defaultModelList)
-                        modelAdapter.notifyDataSetChanged()
-                        binding.spinnerModel.setSelection(0, false)
-                        return
-                    }
-
-                    val selectedBrand = brands[position]
-                    val models = carData[selectedBrand] ?: defaultModelList
-
+                if (position == 0) {
                     modelAdapter.clear()
-                    modelAdapter.addAll(models)
+                    modelAdapter.addAll(defaultModelList)
                     modelAdapter.notifyDataSetChanged()
                     binding.spinnerModel.setSelection(0, false)
-
-                } catch (e: Exception) {
-                    Log.e("SelectPlanFragment", "Error updating model spinner", e)
+                    return
                 }
+
+                val selectedBrand = brands[position]
+                val models = carData[selectedBrand] ?: defaultModelList
+
+                modelAdapter.clear()
+                modelAdapter.addAll(models)
+                modelAdapter.notifyDataSetChanged()
+                binding.spinnerModel.setSelection(0, false)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
 
-    private fun setupInsuranceTypeSelection() {
+    private fun setupRadioGroup() {
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             selectedType = when (checkedId) {
                 R.id.radioType1 -> "ชั้น 1"
@@ -144,10 +106,30 @@ class SelectPlanFragment : Fragment() {
         }
     }
 
+    private fun setupSearchButton() {
+        binding.btnSearch.setOnClickListener {
+            val brand = binding.spinnerBrand.selectedItem?.toString() ?: ""
+            val model = binding.spinnerModel.selectedItem?.toString() ?: ""
+            val year = binding.spinnerYear.selectedItem?.toString() ?: ""
+
+            if (brand.startsWith("เลือก") || model.startsWith("เลือก") || year.startsWith("เลือก")) {
+                Toast.makeText(requireContext(), "กรุณาเลือกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val bundle = Bundle().apply {
+                putString("insuranceType", selectedType)
+                putString("brand", brand)
+                putString("model", model)
+                putString("year", year)
+            }
+
+            findNavController().navigate(R.id.searchInsuranceFragment, bundle)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
-

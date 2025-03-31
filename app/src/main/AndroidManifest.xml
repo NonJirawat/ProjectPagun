@@ -53,6 +53,11 @@
             android:exported="true"
             android:label="Admin"
             android:theme="@style/Theme.ProjectPagun"/>
+        <activity
+            android:name=".ui.Admin.AddPlanActivity"
+            android:exported="true"
+            android:label="Add Insurance Plan"/>
+
 
     </application>
 

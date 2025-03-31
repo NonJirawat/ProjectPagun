@@ -4,58 +4,67 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectpagun.databinding.FragmentSearchInsuranceBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
+data class InsurancePlan(
+    val id: String = "",
+    val type: String = "",
+    val brand: String = "",
+    val model: String = "",
+    val year: String = "",
+    val price: Long = 0,
+    val detail: String = ""
+)
+
 class SearchInsuranceFragment : Fragment() {
 
     private var _binding: FragmentSearchInsuranceBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: InsuranceAdapter
-    private val db = FirebaseFirestore.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchInsuranceBinding.inflate(inflater, container, false)
 
-        // ✅ ใช้ Bundle แทน Safe Args
-        val bundle = arguments
-        val selectedType = bundle?.getString("selectedType") ?: "ชั้น 1"
-        val brand = bundle?.getString("brand") ?: "Toyota"
-        val model = bundle?.getString("model") ?: "Camry"
-        val year = bundle?.getString("year") ?: "2023"
+        val insuranceType = arguments?.getString("insuranceType") ?: ""
+        val brand = arguments?.getString("brand") ?: ""
+        val model = arguments?.getString("model") ?: ""
+        val year = arguments?.getString("year") ?: ""
 
-        setupRecyclerView()
-        loadInsurancePlans(selectedType, brand, model, year)
+        binding.recyclerPlans.layoutManager = LinearLayoutManager(requireContext())
 
-        return binding.root
-    }
-
-    private fun setupRecyclerView() {
-        adapter = InsuranceAdapter { selectedInsurance ->
-            // ✅ ทำอะไรบางอย่างเมื่อกดเลือกแผนประกัน เช่น บันทึกลง Firestore
-        }
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = adapter
-    }
-
-    private fun loadInsurancePlans(type: String, brand: String, model: String, year: String) {
-        db.collection("insurance_plans")
-            .whereEqualTo("type", type)
-            .whereEqualTo("car_brand", brand)
-            .whereEqualTo("car_model", model)
-            .whereEqualTo("car_year", year)
+        firestore.collection("insurance_plans")
+            .whereEqualTo("type", insuranceType)
+            .whereEqualTo("brand", brand)
+            .whereEqualTo("model", model)
+            .whereEqualTo("year", year)
             .get()
-            .addOnSuccessListener { documents ->
-                val insuranceList = documents.mapNotNull { it.toObject(InsuranceModel::class.java) }
-                adapter.submitList(insuranceList)
+            .addOnSuccessListener { result ->
+                val plans = result.map {
+                    InsurancePlan(
+                        id = it.id,
+                        type = it.getString("type") ?: "",
+                        brand = it.getString("brand") ?: "",
+                        model = it.getString("model") ?: "",
+                        year = it.getString("year") ?: "",
+                        price = it.getLong("price") ?: 0,
+                        detail = it.getString("detail") ?: ""
+                    )
+                }
+
+                val adapter = PlanAdapter(plans)
+                binding.recyclerPlans.adapter = adapter
             }
             .addOnFailureListener {
-                // ✅ แสดงข้อความเมื่อโหลดข้อมูลล้มเหลว
+                Toast.makeText(requireContext(), "เกิดข้อผิดพลาดในการโหลดแผนประกัน", Toast.LENGTH_SHORT).show()
             }
+
+        return binding.root
     }
 
     override fun onDestroyView() {

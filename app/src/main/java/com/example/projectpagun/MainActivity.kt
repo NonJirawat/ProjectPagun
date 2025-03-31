@@ -57,5 +57,26 @@ class MainActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Log.e("FirebaseTest", "❌ ส่งข้อมูลล้มเหลว: ${it.message}")
             }
+        navView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    navController.popBackStack(R.id.navigation_home, false)
+                    true
+                }
+                R.id.navigation_dashboard -> {
+                    navController.navigate(R.id.navigation_dashboard)
+                    true
+                }
+                R.id.navigation_notifications -> {
+                    navController.navigate(R.id.navigation_notifications)
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
+
 }
+
+
