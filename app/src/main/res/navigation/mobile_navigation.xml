@@ -52,7 +52,12 @@
         android:id="@+id/claimFragment"
         android:name="com.example.projectpagun.ui.claim.ClaimFragment"
         android:label="Claim"
-        tools:layout="@layout/activity_claim" />
+        tools:layout="@layout/activity_claim_list" />
+    <fragment
+        android:id="@+id/confirmPurchaseFragment"
+        android:name="com.example.projectpagun.ui.insurance.ConfirmPurchaseFragment"
+        android:label="ยืนยันซื้อประกัน"
+        tools:layout="@layout/fragment_confirm_purchase" />
 
     <!-- หน้า Search Insurance -->
     <fragment

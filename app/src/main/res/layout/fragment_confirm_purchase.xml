@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etLicensePlate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="เลขทะเบียนรถ"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/etOwnerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ชื่อผู้ถือกรมธรรม์"
+            android:inputType="textPersonName"
+            android:layout_marginTop="12dp" />
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="เบอร์โทรศัพท์"
+            android:inputType="phone"
+            android:layout_marginTop="12dp" />
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ที่อยู่"
+            android:inputType="textPostalAddress"
+            android:layout_marginTop="12dp" />
+
+        <Button
+            android:id="@+id/btnConfirmPurchase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ยืนยันซื้อประกัน"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+</ScrollView>

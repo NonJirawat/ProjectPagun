@@ -1,4 +1,4 @@
-package com.example.projectpagun.ui.Admin
+package com.example.projectpagun.ui.admin
 
 import android.os.Bundle
 import android.widget.*

@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectpagun.databinding.ActivityLoginBinding
-import com.example.projectpagun.ui.Admin.AdminActivity
-import com.example.projectpagun.MainActivity
+import com.example.projectpagun.ui.admin.AdminActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 

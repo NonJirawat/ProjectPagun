@@ -1,12 +1,12 @@
 package com.example.projectpagun.ui.insurance
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projectpagun.R
 import com.example.projectpagun.databinding.ItemInsurancePlanBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 
 class PlanAdapter(private val plans: List<InsurancePlan>) :
     RecyclerView.Adapter<PlanAdapter.PlanViewHolder>() {
@@ -27,36 +27,14 @@ class PlanAdapter(private val plans: List<InsurancePlan>) :
         holder.binding.tvDetail.text = plan.detail
         holder.binding.tvPrice.text = "ราคา ${plan.price} บาท"
 
-        // 👇 ปุ่มซื้อ
+        // 👇 ปุ่มซื้อ -> ไปหน้า ConfirmPurchaseFragment
         holder.binding.btnBuy.setOnClickListener {
-            val user = FirebaseAuth.getInstance().currentUser
-            if (user == null) {
-                Toast.makeText(holder.itemView.context, "กรุณาเข้าสู่ระบบ", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            val bundle = Bundle().apply {
+                putString("planId", plan.id)
+                putString("title", "${plan.brand} ${plan.model} - ${plan.type}")
+                putLong("price", plan.price)
             }
-
-            val request = hashMapOf(
-                "uid" to user.uid,
-                "email" to user.email,
-                "plan_id" to plan.id,
-                "type" to plan.type,
-                "brand" to plan.brand,
-                "model" to plan.model,
-                "year" to plan.year,
-                "price" to plan.price,
-                "detail" to plan.detail,
-                "status" to "pending",
-                "timestamp" to com.google.firebase.firestore.FieldValue.serverTimestamp()
-            )
-
-            FirebaseFirestore.getInstance().collection("insurance_requests")
-                .add(request)
-                .addOnSuccessListener {
-                    Toast.makeText(holder.itemView.context, "ส่งคำขอซื้อประกันสำเร็จ", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(holder.itemView.context, "เกิดข้อผิดพลาดในการซื้อ", Toast.LENGTH_SHORT).show()
-                }
+            it.findNavController().navigate(R.id.confirmPurchaseFragment, bundle)
         }
     }
 

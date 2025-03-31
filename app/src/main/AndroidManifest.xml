@@ -49,15 +49,19 @@
 
         <!-- 🔹 AdminActivity -->
         <activity
-            android:name=".ui.Admin.AdminActivity"
+            android:name=".ui.admin.AdminActivity"
             android:exported="true"
             android:label="Admin"
             android:theme="@style/Theme.ProjectPagun"/>
         <activity
-            android:name=".ui.Admin.AddPlanActivity"
+            android:name=".ui.admin.AddPlanActivity"
             android:exported="true"
             android:label="Add Insurance Plan"/>
-
+        <activity
+            android:name=".ui.admin.ClaimListActivity"
+            android:exported="true"
+            android:label="คำขอซื้อประกัน"
+            android:theme="@style/Theme.ProjectPagun" />
 
     </application>
 

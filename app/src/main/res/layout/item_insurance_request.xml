@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="6dp"
+    android:layout_margin="12dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- ชื่อ -->
+        <TextView
+            android:id="@+id/tvOwnerName"
+            android:text="ชื่อ: -"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- เบอร์ -->
+        <TextView
+            android:id="@+id/tvPhone"
+            android:text="เบอร์โทร: -"
+            android:textSize="14sp"
+            android:textColor="#444444"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- ทะเบียน -->
+        <TextView
+            android:id="@+id/tvLicense"
+            android:text="ทะเบียนรถ: -"
+            android:textSize="14sp"
+            android:textColor="#444444"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- แผนประกัน -->
+        <TextView
+            android:id="@+id/tvPlanInfo"
+            android:text="แผน: ชั้น 1 - Toyota Civic 2020"
+            android:textSize="14sp"
+            android:textColor="#555555"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- ราคา -->
+        <TextView
+            android:id="@+id/tvPrice"
+            android:text="ราคา: 9,000 บาท"
+            android:textSize="14sp"
+            android:textColor="#555555"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- สถานะ -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:text="สถานะ: pending"
+            android:textSize="14sp"
+            android:textColor="#FF9800"
+            android:layout_marginTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- ปุ่ม -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btnApprove"
+                android:text="✅ อนุมัติ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/blue"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnReject"
+                android:text="❌ ปฏิเสธ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:backgroundTint="@color/blue"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
