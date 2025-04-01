@@ -9,93 +9,111 @@
     android:background="@android:color/white">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-        <!-- ชื่อ -->
-        <TextView
-            android:id="@+id/tvOwnerName"
-            android:text="ชื่อ: -"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#222222"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!-- รูปภาพด้านซ้าย -->
 
-        <!-- เบอร์ -->
-        <TextView
-            android:id="@+id/tvPhone"
-            android:text="เบอร์โทร: -"
-            android:textSize="14sp"
-            android:textColor="#444444"
-            android:layout_marginTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!-- ข้อมูลด้านขวา -->
+        <ImageView
+            android:id="@+id/imgCar"
+            android:layout_width="114dp"
+            android:layout_height="139dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/pimsub" />
 
-        <!-- ทะเบียน -->
-        <TextView
-            android:id="@+id/tvLicense"
-            android:text="ทะเบียนรถ: -"
-            android:textSize="14sp"
-            android:textColor="#444444"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- แผนประกัน -->
-        <TextView
-            android:id="@+id/tvPlanInfo"
-            android:text="แผน: ชั้น 1 - Toyota Civic 2020"
-            android:textSize="14sp"
-            android:textColor="#555555"
-            android:layout_marginTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- ราคา -->
-        <TextView
-            android:id="@+id/tvPrice"
-            android:text="ราคา: 9,000 บาท"
-            android:textSize="14sp"
-            android:textColor="#555555"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- สถานะ -->
-        <TextView
-            android:id="@+id/tvStatus"
-            android:text="สถานะ: pending"
-            android:textSize="14sp"
-            android:textColor="#FF9800"
-            android:layout_marginTop="6dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- ปุ่ม -->
         <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="end"
-            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp">
+            android:layout_weight="1">
 
-            <Button
-                android:id="@+id/btnApprove"
-                android:text="✅ อนุมัติ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/blue"
-                android:textColor="@android:color/white" />
+            <!-- ชื่อ -->
+            <TextView
+                android:id="@+id/tvOwnerName"
+                android:text="ชื่อ: -"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#222222"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btnReject"
-                android:text="❌ ปฏิเสธ"
-                android:layout_width="wrap_content"
+            <!-- เบอร์ -->
+            <TextView
+                android:id="@+id/tvPhone"
+                android:text="เบอร์โทร: -"
+                android:textSize="14sp"
+                android:textColor="#444444"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ทะเบียน -->
+            <TextView
+                android:id="@+id/tvLicense"
+                android:text="ทะเบียนรถ: -"
+                android:textSize="14sp"
+                android:textColor="#444444"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- แผนประกัน -->
+            <TextView
+                android:id="@+id/tvPlanInfo"
+                android:text="แผน: ชั้น 1 - Toyota Civic 2020"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ราคา -->
+            <TextView
+                android:id="@+id/tvPrice"
+                android:text="ราคา: 9,000 บาท"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- สถานะ -->
+            <TextView
+                android:id="@+id/tvStatus"
+                android:text="สถานะ: pending"
+                android:textSize="14sp"
+                android:textColor="#FF9800"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ปุ่ม -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:backgroundTint="@color/blue"
-                android:textColor="@android:color/white" />
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btnApprove"
+                    android:text="✅ อนุมัติ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/blue"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/btnReject"
+                    android:text="❌ ปฏิเสธ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:backgroundTint="@color/blue"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
