@@ -47,7 +47,6 @@ class RequestAdapter(private val requests: List<InsuranceRequest>) :
         holder.binding.tvPhone.text = "เบอร์โทร: ${request.phone.ifEmpty { "-" }}"
         holder.binding.tvLicense.text = "ทะเบียนรถ: ${request.licensePlate.ifEmpty { "-" }}"
         holder.binding.tvPlanInfo.text = "แผน: ${request.type} - ${request.brand} ${request.model} ${request.year}"
-        holder.binding.tvPrice.text = "ราคา: ${request.price} บาท"
         holder.binding.tvStatus.text = "สถานะ: ${request.status}"
 
         // สีสถานะ

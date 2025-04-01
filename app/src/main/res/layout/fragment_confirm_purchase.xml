@@ -25,6 +25,26 @@
             android:layout_marginTop="12dp" />
 
         <EditText
+            android:id="@+id/etIdCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="เลขบัตรใบขับขี่"
+            android:inputType="phone"
+            android:layout_marginTop="12dp" />
+
+
+        <EditText
+            android:id="@+id/etEgCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="เลขเครื่องยนต์"
+            android:inputType="textPersonName"
+            android:layout_marginTop="12dp" />
+
+
+
+
+        <EditText
             android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

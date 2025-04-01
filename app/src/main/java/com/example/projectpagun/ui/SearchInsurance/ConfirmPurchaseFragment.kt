@@ -31,10 +31,12 @@ class ConfirmPurchaseFragment : Fragment() {
         binding.btnConfirmPurchase.setOnClickListener {
             val license = binding.etLicensePlate.text.toString().trim()
             val name = binding.etOwnerName.text.toString().trim()
+            val idcard = binding.etIdCard.text.toString().trim()
+            val egcode = binding.etEgCode.text.toString().trim()
             val phone = binding.etPhone.text.toString().trim()
             val address = binding.etAddress.text.toString().trim()
 
-            if (license.isEmpty() || name.isEmpty() || phone.isEmpty() || address.isEmpty()) {
+            if (license.isEmpty() || name.isEmpty() ||  idcard.isEmpty() || idcard.isEmpty() ||  phone.isEmpty() || address.isEmpty() ) {
                 Toast.makeText(requireContext(), "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -50,6 +52,8 @@ class ConfirmPurchaseFragment : Fragment() {
                 "planId" to planId,
                 "licensePlate" to license,
                 "ownerName" to name,
+                "idcard" to idcard,
+                "egcode" to egcode,
                 "phone" to phone,
                 "address" to address,
                 "status" to "pending",
