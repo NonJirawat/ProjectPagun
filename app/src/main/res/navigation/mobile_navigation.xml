@@ -23,10 +23,11 @@
 
     <!-- หน้า Status -->
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.projectpagun.ui.status.StatusFragment"
+        android:id="@+id/navigation_status"
+        android:name="com.example.projectpagun.ui.home.StatusFragment"
         android:label="Status"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_status" />
+
 
     <!-- หน้า Profile -->
     <fragment

@@ -1,56 +1,49 @@
-package com.example.projectpagun.ui.status
+package com.example.projectpagun.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.projectpagun.databinding.FragmentDashboardBinding
+import com.example.projectpagun.databinding.FragmentStatusBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class StatusFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
-    private val binding get() = _binding!!
-
-    private val db = FirebaseFirestore.getInstance()
+    private lateinit var binding: FragmentStatusBinding
+    private lateinit var db: FirebaseFirestore
+    private lateinit var currentUserUid: String
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    ): View? {
+        // ใช้ ViewBinding เพื่อเชื่อมโยงกับ UI
+        binding = FragmentStatusBinding.inflate(inflater, container, false)
 
-        // กดปุ่มแล้วเพิ่มข้อมูลไป Firestore
-        binding.buttonAddData.setOnClickListener {
-            addDataToFirestore()
-        }
+        db = FirebaseFirestore.getInstance()
 
-        return root
-    }
+        // ดึง UID ของผู้ใช้ปัจจุบัน
+        currentUserUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
 
-    private fun addDataToFirestore() {
-        val data = hashMapOf(
-            "title" to "Test Title",
-            "description" to "This is a test description",
-            "timestamp" to System.currentTimeMillis()
-        )
+        // ฟังการเปลี่ยนแปลงสถานะคำขอจาก Firestore
+        db.collection("insurance_requests")
+            .whereEqualTo("uid", currentUserUid)
+            .addSnapshotListener { documents, e ->
+                if (e != null) {
+                    return@addSnapshotListener
+                }
 
-        db.collection("dashboard_data")
-            .add(data)
-            .addOnSuccessListener {
-                Toast.makeText(requireContext(), "เพิ่มข้อมูลสำเร็จ!", Toast.LENGTH_SHORT).show()
+                if (documents != null && !documents.isEmpty) {
+                    val request = documents.first()
+                    val status = request.getString("status")
+                    binding.tvStatus.text = "สถานะคำขอ: $status"
+                } else {
+                    binding.tvStatus.text = "ยังไม่มีคำขอ"
+                }
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "เกิดข้อผิดพลาด: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return binding.root
     }
 }

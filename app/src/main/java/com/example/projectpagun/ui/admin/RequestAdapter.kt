@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectpagun.databinding.ItemInsuranceRequestBinding
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 
 // ข้อมูลคำขอซื้อประกัน
 data class InsuranceRequest(
     val id: String = "",
+    val uid: String = "", // เพิ่ม uid เพื่อเชื่อมโยงกับผู้ใช้
     val ownerName: String = "",
     val phone: String = "",
     val licensePlate: String = "",
@@ -78,8 +80,12 @@ class RequestAdapter(private val requests: List<InsuranceRequest>) :
     }
 
     private fun updateStatus(request: InsuranceRequest, newStatus: String, holder: RequestViewHolder) {
+        val updateData = mutableMapOf<String, Any>(
+            "status" to newStatus
+        )
+
         db.collection("insurance_requests").document(request.id)
-            .update("status", newStatus)
+            .update(updateData)
             .addOnSuccessListener {
                 request.status = newStatus
                 notifyItemChanged(holder.adapterPosition)

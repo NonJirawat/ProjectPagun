@@ -7,7 +7,7 @@
         android:title="หน้าแรก" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_status"
         android:icon="@drawable/ic_status"
         android:title="สถานะ" />
 

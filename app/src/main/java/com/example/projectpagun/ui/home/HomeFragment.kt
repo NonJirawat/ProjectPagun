@@ -55,27 +55,41 @@ class HomeFragment : Fragment() {
 
     private fun loadInsurancePlan() {
         user?.let { u ->
-            db.collection("insurance_plans").document(u.uid)
-                .addSnapshotListener { document, error ->
-                    if (error != null || document == null || !document.exists()) {
+            db.collection("insurance_requests")
+                .whereEqualTo("uid", u.uid)
+                .whereEqualTo("status", "approved")
+                .get()
+                .addOnSuccessListener { result ->
+                    if (result.isEmpty) {
                         binding.insuranceCard.visibility = View.GONE
-                        return@addSnapshotListener
+                        return@addOnSuccessListener
                     }
 
-                    val startDateTimestamp = document.getTimestamp("start_date")
-                    val endDateTimestamp = document.getTimestamp("end_date")
+                    val request = result.first()  // เอาเฉพาะรายการล่าสุด
+                    val type = request.getString("type") ?: "-"
+                    val brand = request.getString("brand") ?: "-"
+                    val model = request.getString("model") ?: "-"
+                    val year = request.getString("year") ?: "-"
+                    val title = "$type - $brand $model $year"
 
-                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                    val startDateString = startDateTimestamp?.toDate()?.let { dateFormat.format(it) } ?: "-"
-                    val endDateString = endDateTimestamp?.toDate()?.let { dateFormat.format(it) } ?: "-"
+                    val startDate = request.getTimestamp("start_date")
+                    val endDate = request.getTimestamp("end_date")
+
+                    val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val startText = startDate?.toDate()?.let { format.format(it) } ?: "-"
+                    val endText = endDate?.toDate()?.let { format.format(it) } ?: "-"
 
                     binding.insuranceCard.visibility = View.VISIBLE
-                    binding.tvInsuranceTitle.text = document.getString("title") ?: "ไม่พบข้อมูล"
-                    binding.tvStartDate.text = "เริ่มต้น: $startDateString"
-                    binding.tvEndDate.text = "หมดอายุ: $endDateString"
+                    binding.tvInsuranceTitle.text = title
+                    binding.tvStartDate.text = "เริ่ม: $startText"
+                    binding.tvEndDate.text = "หมดอายุ: $endText"
+                }
+                .addOnFailureListener {
+                    binding.insuranceCard.visibility = View.GONE
                 }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
