@@ -24,7 +24,7 @@
     <!-- หน้า Status -->
     <fragment
         android:id="@+id/navigation_status"
-        android:name="com.example.projectpagun.ui.home.StatusFragment"
+        android:name="com.example.projectpagun.ui.status.StatusFragment"
         android:label="Status"
         tools:layout="@layout/fragment_status" />
 
