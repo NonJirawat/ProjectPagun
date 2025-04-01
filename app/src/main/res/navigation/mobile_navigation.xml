@@ -52,8 +52,17 @@
     <fragment
         android:id="@+id/claimFragment"
         android:name="com.example.projectpagun.ui.claim.ClaimFragment"
-        android:label="Claim"
-        tools:layout="@layout/activity_claim_list" />
+        android:label="Claim Fragment">
+        <action
+            android:id="@+id/action_claimFragment_to_statusFragment"
+            app:destination="@id/statusFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/statusFragment"
+        android:name="com.example.projectpagun.ui.status.StatusFragment"
+        android:label="Status Fragment" />
+
     <fragment
         android:id="@+id/confirmPurchaseFragment"
         android:name="com.example.projectpagun.ui.insurance.ConfirmPurchaseFragment"

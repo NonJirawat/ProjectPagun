@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.projectpagun.databinding.ActivityClaimBinding
 
-class ClaimFragment : Fragment() {
+class ClaimActivity : Fragment() {
 
     private var _binding: ActivityClaimBinding? = null
     private val binding get() = _binding!!

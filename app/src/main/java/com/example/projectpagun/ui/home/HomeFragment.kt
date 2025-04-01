@@ -20,14 +20,15 @@ import androidx.core.view.updatePadding
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding!!  // นี่จะทำให้เกิด NullPointerException หาก _binding เป็น null
+
     private val db = FirebaseFirestore.getInstance()
     private val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)  // กำหนดค่า _binding
 
         loadInsurancePlan()
 
@@ -42,13 +43,12 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    // ✅ จัด status bar padding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.topAppBar) { v, insets ->
             val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
-            v.setPadding(0, statusBarHeight, 0, 0) // 👈 เพิ่ม padding top เท่าความสูง status bar
+            v.setPadding(0, statusBarHeight, 0, 0)  // เพิ่ม padding สำหรับ status bar
             insets
         }
     }
@@ -90,9 +90,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _binding = null  // ทำลาย _binding หลังจาก Fragment ถูกทำลาย
     }
 }
