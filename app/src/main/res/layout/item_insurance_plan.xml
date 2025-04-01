@@ -22,6 +22,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp" />
+    <TextView
+        android:id="@+id/tvInsuranceAmount"
+        android:text="ทุนประกัน: 0 บาท"
+        android:textSize="14sp"
+        android:textColor="#555555"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:id="@+id/tvExcessAmount"
+        android:text="ค่าเสียหายส่วนแรก: 0 บาท"
+        android:textSize="14sp"
+        android:textColor="#555555"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp" />
+
 
     <TextView
         android:id="@+id/tvPrice"

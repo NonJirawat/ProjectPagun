@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".ui.profile.ProfileFragment">
 
-    <!-- หัวข้อโปรไฟล์ -->
+    <!-- รูปโปรไฟล์ -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- ข้อมูลโปรไฟล์ -->
     <TextView
         android:id="@+id/tvProfileTitle"
         android:layout_width="wrap_content"
@@ -15,103 +29,89 @@
         android:text="ข้อมูลโปรไฟล์"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#222222"
+        app:layout_constraintTop_toBottomOf="@id/imgProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"/>
 
-    <!-- แสดงอีเมลของผู้ใช้ -->
+    <!-- อีเมล -->
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="อีเมล: -"
         android:textSize="16sp"
+        android:textColor="#555555"
+        android:layout_marginTop="8dp"
+        android:textStyle="italic"
         app:layout_constraintTop_toBottomOf="@id/tvProfileTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- ข้อมูลรถยนต์ -->
+    <!-- ทะเบียนรถ -->
     <TextView
         android:id="@+id/tvCarBrand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ยี่ห้อรถ: -"
+        android:text="ทะเบียนรถ: -"
         android:textSize="16sp"
+        android:textColor="#555555"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/tvEmail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- เจ้าของ -->
     <TextView
         android:id="@+id/tvCarModel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="รุ่นรถ: -"
+        android:text="เจ้าของ: -"
         android:textSize="16sp"
+        android:textColor="#555555"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/tvCarBrand"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- เบอร์โทร -->
     <TextView
-        android:id="@+id/tvCarYear"
+        android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ปีที่ผลิต: -"
+        android:text="เบอร์โทร: -"
         android:textSize="16sp"
+        android:textColor="#555555"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/tvCarModel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- ปุ่มแก้ไขข้อมูล -->
-
-    <!-- ปุ่ม Logout -->
 
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="24dp"
         android:text="ออกจากระบบ"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnEditProfile" />
-
+        app:layout_constraintTop_toBottomOf="@id/btnEditProfile"/>
     <Button
         android:id="@+id/btnEditProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginTop="432dp"
         android:text="แก้ไขข้อมูล"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCarYear" />
+        app:layout_constraintTop_toBottomOf="@id/tvPhone"/>
 
-    <TextView
-        android:id="@+id/tvStartDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="172dp"
-        android:text="เริ่มต้น: -"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCarYear" />
+    <!-- ปุ่ม Logout -->
 
-    <TextView
-        android:id="@+id/tvEndDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="16dp"
-        android:text="หมดอายุ: -"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvStartDate" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

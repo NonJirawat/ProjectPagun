@@ -27,7 +27,10 @@ class PlanAdapter(private val plans: List<InsurancePlan>) :
         holder.binding.tvDetail.text = plan.detail
         holder.binding.tvPrice.text = "ราคา ${plan.price} บาท"
 
-        // 👇 ปุ่มซื้อ -> ไปหน้า ConfirmPurchaseFragment
+        // เพิ่มการแสดงข้อมูลทุนประกันและค่าเสียหายส่วนแรก
+        holder.binding.tvInsuranceAmount.text = "ทุนประกัน: ${plan.insuranceAmount} บาท"
+        holder.binding.tvExcessAmount.text = "ค่าเสียหายส่วนแรก: ${plan.excessAmount} บาท"
+
         holder.binding.btnBuy.setOnClickListener {
             val bundle = Bundle().apply {
                 putString("planId", plan.id)

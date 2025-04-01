@@ -17,9 +17,10 @@ data class InsurancePlan(
     val model: String = "",
     val year: String = "",
     val price: Long = 0,
-    val detail: String = ""
+    val detail: String = "",
+    val insuranceAmount: Long = 0,  // ทุนประกัน
+    val excessAmount: Long = 0  // ค่าเสียหายส่วนแรก
 )
-
 class SearchInsuranceFragment : Fragment() {
 
     private var _binding: FragmentSearchInsuranceBinding? = null
@@ -53,7 +54,9 @@ class SearchInsuranceFragment : Fragment() {
                         model = it.getString("model") ?: "",
                         year = it.getString("year") ?: "",
                         price = it.getLong("price") ?: 0,
-                        detail = it.getString("detail") ?: ""
+                        detail = it.getString("detail") ?: "",
+                        insuranceAmount = it.getLong("insuranceAmount") ?: 0,  // ทุนประกัน
+                        excessAmount = it.getLong("excessAmount") ?: 0  // ค่าเสียหายส่วนแรก
                     )
                 }
 

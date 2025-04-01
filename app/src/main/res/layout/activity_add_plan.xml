@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -48,6 +47,22 @@
 
         <!-- รายละเอียดเพิ่มเติม -->
         <EditText
+            android:id="@+id/etInsuranceAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="ทุนประกัน (บาท)"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etExcessAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:hint="ค่าเสียหายส่วนแรก (บาท)"
+            android:inputType="numberDecimal" />
+
+        <EditText
             android:id="@+id/etDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +70,11 @@
             android:inputType="textMultiLine"
             android:minLines="3"
             android:gravity="top"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="12dp" />
+
+        <!-- ทุนประกัน -->
+
+        <!-- ค่าเสียหายส่วนแรก -->
 
         <Button
             android:id="@+id/btnAddPlan"

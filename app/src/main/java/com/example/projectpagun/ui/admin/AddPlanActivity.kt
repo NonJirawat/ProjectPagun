@@ -16,6 +16,8 @@ class AddPlanActivity : AppCompatActivity() {
     private lateinit var spinnerYear: Spinner
     private lateinit var etPrice: EditText
     private lateinit var etDetail: EditText
+    private lateinit var etInsuranceAmount: EditText
+    private lateinit var etExcessAmount: EditText
     private lateinit var btnAddPlan: Button
 
     private val carData = mapOf(
@@ -36,6 +38,8 @@ class AddPlanActivity : AppCompatActivity() {
         spinnerYear = findViewById(R.id.spinnerYear)
         etPrice = findViewById(R.id.etPrice)
         etDetail = findViewById(R.id.etDetail)
+        etInsuranceAmount = findViewById(R.id.etInsuranceAmount)
+        etExcessAmount = findViewById(R.id.etExcessAmount)
         btnAddPlan = findViewById(R.id.btnAddPlan)
 
         setupDropdowns()
@@ -79,13 +83,17 @@ class AddPlanActivity : AppCompatActivity() {
         val year = spinnerYear.selectedItem.toString()
         val priceText = etPrice.text.toString().trim()
         val detail = etDetail.text.toString().trim()
+        val insuranceAmountText = etInsuranceAmount.text.toString().trim()
+        val excessAmountText = etExcessAmount.text.toString().trim()
 
-        if (priceText.isEmpty() || model.isEmpty()) {
+        if (priceText.isEmpty() || model.isEmpty() || insuranceAmountText.isEmpty() || excessAmountText.isEmpty()) {
             Toast.makeText(this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
             return
         }
 
         val price = priceText.toLongOrNull() ?: 0
+        val insuranceAmount = insuranceAmountText.toLongOrNull() ?: 0
+        val excessAmount = excessAmountText.toLongOrNull() ?: 0
 
         val plan = hashMapOf(
             "type" to type,
@@ -93,7 +101,9 @@ class AddPlanActivity : AppCompatActivity() {
             "model" to model,
             "year" to year,
             "price" to price,
-            "detail" to detail
+            "detail" to detail,
+            "insuranceAmount" to insuranceAmount,
+            "excessAmount" to excessAmount
         )
 
         FirebaseFirestore.getInstance().collection("insurance_plans")
