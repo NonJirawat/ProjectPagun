@@ -4,8 +4,8 @@
     package="com.example.projectpagun">
 
     <!-- ✅ Permissions สำหรับ Firebase หรือการเชื่อมต่อเน็ต -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -53,16 +53,26 @@
             android:exported="true"
             android:label="Admin"
             android:theme="@style/Theme.ProjectPagun"/>
+
+        <!-- 🔹 เพิ่มแผนประกัน -->
         <activity
-            android:name=".ui.admin.AddPlanActivity"
+            android:name=".ui.admin.addplan.AddPlanActivity"
             android:exported="true"
-            android:label="Add Insurance Plan"/>
+            android:label="Add Insurance Plan" />
+
+        <!-- 🔹 รายการคำขอซื้อประกัน -->
         <activity
             android:name=".ui.admin.ClaimListActivity"
             android:exported="true"
             android:label="คำขอซื้อประกัน"
             android:theme="@style/Theme.ProjectPagun" />
 
+        <!-- ✅ 📌 หน้านี้คุณลืมเพิ่ม: AdminClaimActivity (เพิ่มเข้าไปตรงนี้) -->
+        <activity
+            android:name=".ui.claim.AdminClaimActivity"
+            android:exported="true"
+            android:label="คำขอเคลมประกัน"
+            android:theme="@style/Theme.ProjectPagun" />
     </application>
 
 </manifest>

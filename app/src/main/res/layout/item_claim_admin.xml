@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- ทะเบียนรถ -->
+        <TextView
+            android:id="@+id/tvRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ทะเบียน: -"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#222222" />
+
+        <!-- รายละเอียดการเคลม -->
+        <TextView
+            android:id="@+id/tvClaimDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="รายละเอียด: -"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:textColor="#444444" />
+
+        <!-- วันที่เคลม -->
+        <TextView
+            android:id="@+id/tvClaimDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="วันที่เคลม: -"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:textColor="#444444" />
+
+        <!-- สถานะปัจจุบัน -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="สถานะ"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:textColor="#FF9800" />
+
+        <!-- Spinner สำหรับเลือกสถานะใหม่ -->
+        <Spinner
+            android:id="@+id/spinnerStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#DDDDDD" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

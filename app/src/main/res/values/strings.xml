@@ -9,4 +9,9 @@
     <string name="select_year">เลือกปีรถยนต์</string>
     <!-- ปุ่มค้นหา -->
     <string name="search_button">ค้นหาแผนประกัน</string>
+    <string-array name="claim_status">
+        <item>ดำเนินการ</item>
+        <item>กำลังซ่อม</item>
+        <item>เสร็จสิ้น</item>
+    </string-array>
 </resources>
